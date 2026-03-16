@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Argha Cosmic Portfolio</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+scroll-behavior:smooth;
+}
+
+body{
+background:#020617;
+color:white;
+overflow-x:hidden;
+}
+
+/* canvas */
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-2;
+}
+
+/* mouse glow */
+
+.cursor{
+position:fixed;
+width:20px;
+height:20px;
+border-radius:50%;
+background:#38bdf8;
+pointer-events:none;
+box-shadow:0 0 20px #38bdf8,0 0 40px #38bdf8;
+z-index:999;
+}
+
+/* navbar */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 10%;
+background:rgba(0,0,0,0.4);
+backdrop-filter:blur(10px);
+}
+
+nav a{
+color:white;
+margin-left:25px;
+text-decoration:none;
+}
+
+/* hero */
+
+.hero{
+height:90vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+.hero h1{
+font-size:70px;
+margin-bottom:20px;
+}
+
+.hero span{
+color:#38bdf8;
+text-shadow:0 0 20px #38bdf8;
+}
+
+/* button */
+
+.btn{
+padding:15px 40px;
+border-radius:40px;
+background:#38bdf8;
+color:black;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+}
+
+.btn:hover{
+transform:scale(1.2);
+box-shadow:0 0 30px #38bdf8;
+}
+
+/* sections */
+
+section{
+padding:100px 10%;
+}
+
+/* grid */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+/* cards */
+
+.card{
+padding:30px;
+border-radius:15px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+transition:.4s;
+transform-style:preserve-3d;
+}
+
+.card:hover{
+transform:rotateY(15deg) rotateX(10deg) scale(1.1);
+background:rgba(255,255,255,0.1);
+}
+
+.card h3{
+color:#38bdf8;
+margin-bottom:10px;
+}
+
+/* footer */
+
+footer{
+text-align:center;
+padding:40px;
+opacity:.7;
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="space"></canvas>
+<div class="cursor" id="cursor"></div>
+
+<nav>
+<h2>Argha</h2>
+<div>
+<a href="#about">About</a>
+<a href="#project">Projects</a>
+<a href="#contact">Contact</a>
+</div>
+</nav>
+
+<div class="hero">
+
+<h1>Argha <span>Cosmic Dev</span></h1>
+
+<p>Future developer exploring web, AI, dan teknologi masa depan.</p>
+
+<br>
+
+<a href="#project" class="btn">Explore</a>
+
+</div>
+
+<section id="about">
+
+<h2 style="text-align:center;margin-bottom:50px">About Me</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Web Development</h3>
+<p>Membuat website modern dan interaktif.</p>
+</div>
+
+<div class="card">
+<h3>Design</h3>
+<p>UI futuristik dan user friendly.</p>
+</div>
+
+<div class="card">
+<h3>Future Tech</h3>
+<p>Tertarik AI dan startup teknologi.</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="project">
+
+<h2 style="text-align:center;margin-bottom:50px">Projects</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Portfolio</h3>
+<p>Website personal profesional.</p>
+</div>
+
+<div class="card">
+<h3>Landing Page</h3>
+<p>Website promosi modern.</p>
+</div>
+
+<div class="card">
+<h3>Web App</h3>
+<p>Aplikasi berbasis web.</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="contact">
+
+<h2 style="text-align:center;margin-bottom:50px">Contact</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Email</h3>
+<p>email@gmail.com</p>
+</div>
+
+<div class="card">
+<h3>Instagram</h3>
+<p>@username</p>
+</div>
+
+<div class="card">
+<h3>LinkedIn</h3>
+<p>linkedin.com</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+© 2026 Argha Cosmic Portfolio 🚀
+
+</footer>
+
+<script>
+
+/* mouse glow */
+
+const cursor=document.getElementById("cursor")
+
+document.addEventListener("mousemove",e=>{
+cursor.style.left=e.clientX+"px"
+cursor.style.top=e.clientY+"px"
+})
+
+/* galaxy particles */
+
+const canvas=document.getElementById("space")
+const ctx=canvas.getContext("2d")
+
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
+
+let stars=[]
+
+for(let i=0;i<200;i++){
+stars.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2,
+d:Math.random()*0.5
+})
+}
+
+function draw(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+ctx.fillStyle="white"
+
+stars.forEach(s=>{
+
+ctx.beginPath()
+ctx.arc(s.x,s.y,s.r,0,Math.PI*2)
+ctx.fill()
+
+s.y+=s.d
+
+if(s.y>canvas.height){
+s.y=0
+}
+
+})
+
+requestAnimationFrame(draw)
+
+}
+
+draw()
+
+</script>
+
+</body>
+</html>
